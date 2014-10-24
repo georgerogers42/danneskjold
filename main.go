@@ -10,5 +10,6 @@ func main() {
 	bind := flag.String("bind", "Port to bind to", ":8080")
 	flag.Parse()
 	http.Handle("/", repo.App)
-	http.ListenAndServe(*bind, nil)
+	err := http.ListenAndServe(*bind, nil)
+	panic(err)
 }
