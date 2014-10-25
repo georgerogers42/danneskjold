@@ -6,6 +6,8 @@ import (
 	"html/template"
 )
 
+type object interface{}
+
 var App = mux.NewRouter()
 
 func init() {
@@ -18,7 +20,7 @@ var baseTpl = template.Must(template.ParseFiles("templates/index.tpl"))
 var indexTpl = template.Must(baseTpl.ParseFiles("templates/chapters/hello.tpl"))
 func Index(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	env := map[string]string{}
+	env := map[string]object{}
 	if x, bound := vars["name"]; bound {
 		env["Name"] = x
 	} else {
