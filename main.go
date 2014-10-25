@@ -13,6 +13,7 @@ func main() {
 	flag.Parse()
 	log.Println("Binding on ---", bind)
 	http.Handle("/", repo.App)
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	err := http.ListenAndServe(bind, nil)
 	panic(err)
 }
